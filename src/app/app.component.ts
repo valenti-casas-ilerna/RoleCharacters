@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Character } from './models/character.model';
 
 @Component({
@@ -10,6 +11,7 @@ export class AppComponent {
 
   charactersArray: Character[] = [];
   characterSelected: Character = null;
+  isCreatingNewChar: boolean = false;
 
   // Se llama al inicializar el componente
   ngOnInit(): void {
@@ -20,6 +22,10 @@ export class AppComponent {
 
   // Función que se ejecuta al hacer click en un personaje de la lista
   selectCharacter(character: Character): void {
+
+    // Quitamos la interfaz de crear un personaje
+    this.isCreatingNewChar = false;
+
     // Guardamos en una variable de la clase el personaje seleccionado
     this.characterSelected = character;
   }
@@ -59,5 +65,9 @@ export class AppComponent {
       });
   }
 
+  // Funcion para añadir un nuevo personaje en el array
+  addCharacter(newCharacter: Character): void {
+    this.charactersArray.push(newCharacter);
+  }
 
 }

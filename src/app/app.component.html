@@ -6,13 +6,22 @@
         <a *ngFor="let character of charactersArray" class="list-group-item list-group-item-action"
           (click)="selectCharacter(character)">{{character.name}}</a>
       </div>
+
+      <br>
+
+      <button type="button" class="btn btn-info" (click)="isCreatingNewChar = true">Add Character</button>
+
     </div>
 
-    <div class="col">
-      <app-character
-        [character]="characterSelected"
-        (saveEvent)="updateCharacter($event)"
+    <div *ngIf="isCreatingNewChar === false" class="col">
+      <app-character [character]="characterSelected" (saveEvent)="updateCharacter($event)"
         (deleteEvent)="deleteCharacter($event)"></app-character>
+    </div>
+
+    <div *ngIf="isCreatingNewChar === true" class="col">
+
+      <app-new-character (characterEvent)="addCharacter($event)"></app-new-character>
+
     </div>
 
   </div>
