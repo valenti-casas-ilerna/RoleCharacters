@@ -18,6 +18,10 @@ export class AppComponent {
     this.charactersArray.push(new Character('Pedro', 34, Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100)));
     this.charactersArray.push(new Character('Juan', 22, Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100)));
     this.charactersArray.push(new Character('Roberto', 28, Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100)));
+
+    // Cargamos el personaje que tengamos guardado previamente en memoria del navegador
+    let character = localStorage.getItem('character');
+    this.characterSelected = JSON.parse(character);
   }
 
   // Función que se ejecuta al hacer click en un personaje de la lista
@@ -28,6 +32,9 @@ export class AppComponent {
 
     // Guardamos en una variable de la clase el personaje seleccionado
     this.characterSelected = character;
+
+    // Guardamos en el local storage del navegador el personaje seleccionado
+    localStorage.setItem('character', JSON.stringify(character));
   }
 
   // Función para actualizar el personaje
