@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Character } from './models/character.model';
+import { CharacterService } from './services/character.service';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +14,14 @@ export class AppComponent {
   characterSelected: Character = null;
   isCreatingNewChar: boolean = false;
 
+  // Inyectamos el servicio en el constructor (creamos una variable privada del tipo CharacterService)
+  constructor(private charService: CharacterService) {}
+
   // Se llama al inicializar el componente
   ngOnInit(): void {
-    this.charactersArray.push(new Character('Pedro', 34, Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100)));
-    this.charactersArray.push(new Character('Juan', 22, Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100)));
-    this.charactersArray.push(new Character('Roberto', 28, Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100)));
+
+    // Usamos el servicio para pedir todos los personajes en lugar de crearlos aquí
+    this.charactersArray = this.charService.getAllCharacters();
 
     // Cargamos el personaje que tengamos guardado previamente en memoria del navegador
     let character = localStorage.getItem('character');
